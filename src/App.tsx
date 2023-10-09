@@ -5,14 +5,16 @@
 import ExpenseForm from "./components/ExpenseForm";
 import IncomeForm from "./components/IncomeForm";
 import TargetForm from "./components/TargetForm";
+import TransferForm from "./components/TransferForm";
 
 
 const App = () =>{
   return (
-    <div>
+    <div className="App">
       <IncomeForm />
       <ExpenseForm />
       <TargetForm />
+      <TransferForm />
     </div>
   )
 } 
