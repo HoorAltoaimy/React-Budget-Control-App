@@ -3,6 +3,36 @@
   margin: 0;
   box-sizing: border-box;
 }
-App{
-  background-color: red;
+.app{
+  height: 100%;
+  background-color: rgb(25, 8, 47);
+}
+.title{
+  color: rgb(245, 247, 248);
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.form1{
+  background-color:  rgb(25, 8, 47);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem;
+  gap: 2rem;
+}
+.card{
+  height: 40vh;
+  background-color: rgb(109, 103, 129);
+  color:rgb(25, 8, 47);
+  border-radius: 10px;
+  padding: 1rem;
+  line-height: 2rem;
+}
+.form2{
+  background-color: rgb(25, 8, 47);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
