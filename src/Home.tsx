@@ -7,16 +7,21 @@ const Home = () => {
   return (
     <div className="home">
       <BrowserRouter>
-        {/* <div className="title">
-        <h1>Budget Control App</h1>
-      </div> */}
-
+      <div className="navbar">
         <Navbar />
-        <div className="form1">
+       </div>
+        <div className="main">
           <Routes>
             <Route path="/App" element={<App />} />
           </Routes>
+
+          <div className="title">
+        <h1>Budget Control App home page</h1>
+      </div> 
         </div>
+
+        
+      
       </BrowserRouter>
     </div>
   );

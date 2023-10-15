@@ -3,6 +3,23 @@
   margin: 0;
   box-sizing: border-box;
 }
+.main{
+  height: 100%;
+  background-color: rgb(25, 8, 47);
+}
+.navbar{
+  display: flex;
+  justify-content: center;
+  background-color: rgb(25, 8, 47);
+  padding: 1rem;
+}
+.link{
+  margin: 0.5rem;
+  color: aliceblue;
+}
+.link:hover{
+  color:rgb(134, 133, 133);
+}
 .app{
   height: 100%;
   background-color: rgb(25, 8, 47);

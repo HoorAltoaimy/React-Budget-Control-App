@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import App from "../App";
 
 const Navbar = () => {
   return (
@@ -8,8 +9,8 @@ const Navbar = () => {
       <Link to="/TargetForm">Target Form</Link>
       <Link to="/TransferForm">Transfer Form</Link> */}
 
-      <Link to="/">Home</Link>
-      <Link to="/App">App</Link>
+      <Link className="link" to="/">Home</Link>
+      <Link className="link" to="/App">App</Link>
     </nav>
   );
 };

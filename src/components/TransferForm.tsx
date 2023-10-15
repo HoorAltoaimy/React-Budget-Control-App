@@ -1,15 +1,30 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
 type TransferType = {
-  getCurrentSaving: (amount: number) => void; 
+  getCurrentSaving: (amount: number) => void;
   incomeAmount: number;
   expenseAmount: number;
   savingAmount: number;
-}
+};
 
 const TransferForm = (props: TransferType) => {
   const [transfer, setTransfer] = useState(0);
-  const [transfers, setTransfers] = useState([]);
+
+  const [balance, setBalance] = useState(0);
+  const [totalBalance, setTotalBalance] = useState(0);
+
+  const calculateBalance = () => {
+    setBalance(props.incomeAmount - props.expenseAmount - props.savingAmount);
+  };
+  
+
+  useEffect(() => {
+    calculateBalance();
+    }, [props.incomeAmount, props.expenseAmount, props.savingAmount]);
+
+  // useEffect(() => {
+  //   calculateTotalBalance();
+  //   }, [balance]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTransfer(Number(event.target.value));
@@ -23,7 +38,9 @@ const TransferForm = (props: TransferType) => {
 
   return (
     <div className="card">
-      <h3>Current balance: {props.incomeAmount - props.expenseAmount - props.savingAmount}</h3>
+      {/* <h3>Current balance: {props.incomeAmount - props.expenseAmount - props.savingAmount}</h3> */}
+      <h3>Current balance: {balance}</h3>
+
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="transfer">Transfer for saving account</label>

@@ -40,7 +40,7 @@ const TargetForm = (props: TargetType) => {
       <p>Current saving: {props.saving}</p>
       <p>Target:{target}</p>
       <p>Progress: </p>
-      <progress max={2000} value={100}/>
+      <progress max={target} value={(props.saving/target)*100}/>
     </div>
   );
 };
