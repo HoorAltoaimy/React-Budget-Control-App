@@ -1,14 +1,12 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
-import { v4 as uuidv4 } from 'uuid';
-
-
+import { v4 as uuidv4 } from "uuid";
 
 import { FormTypes } from "../types/componentsTypes";
 
 type SavingType = {
   getExpense: (myExpense: number) => void;
-}
+};
 
 const ExpenseForm = (props: SavingType) => {
   const [expense, setExpense] = useState<FormTypes>({
@@ -20,6 +18,15 @@ const ExpenseForm = (props: SavingType) => {
 
   const [expenses, setExpenses] = useState<FormTypes[]>([]);
 
+  const [invalidInput, setInvalidInput] = useState(false);
+  useEffect(() => {
+    if (expense.amount < 0) {
+      setInvalidInput(true);
+    } else {
+      setInvalidInput(false);
+    }
+  }, [expense]);
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setExpense((prevExpense) => {
@@ -30,7 +37,7 @@ const ExpenseForm = (props: SavingType) => {
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     if (expense.source && expense.amount && expense.date) {
-      const newExpense = {...expense, id: uuidv4()}
+      const newExpense = { ...expense, id: uuidv4() };
       //add expense to expenses array
       setExpenses((prevExpenses) => {
         return [...prevExpenses, newExpense];
@@ -46,9 +53,9 @@ const ExpenseForm = (props: SavingType) => {
   };
 
   const handleDelete = (id: string) => {
-    const filteredExpenses = expenses.filter((expense) => expense.id !== id)
+    const filteredExpenses = expenses.filter((expense) => expense.id !== id);
     setExpenses(filteredExpenses);
-};
+  };
 
   return (
     <div className="card">
@@ -86,7 +93,7 @@ const ExpenseForm = (props: SavingType) => {
             required
           />
         </div>
-        <button>Add expense</button>
+        <button disabled={invalidInput}>Add expense</button>
       </form>
 
       <ul>
@@ -95,7 +102,13 @@ const ExpenseForm = (props: SavingType) => {
             <li key={index}>
               {" "}
               {expense.source}: {expense.amount}SAR on {expense.date}
-              <button onClick={() => {handleDelete(expense.id)}}><FaTrashAlt /></button>
+              <button
+                onClick={() => {
+                  handleDelete(expense.id);
+                }}
+              >
+                <FaTrashAlt />
+              </button>
             </li>
           ))}
       </ul>

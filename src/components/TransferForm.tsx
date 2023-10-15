@@ -13,14 +13,22 @@ const TransferForm = (props: TransferType) => {
   const [balance, setBalance] = useState(0);
   const [totalBalance, setTotalBalance] = useState(0);
 
+  const [invalidInput, setInvalidInput] = useState(false);
+  useEffect(() => {
+    if (transfer < 0) {
+      setInvalidInput(true);
+    } else {
+      setInvalidInput(false);
+    }
+  }, [transfer]);
+
   const calculateBalance = () => {
     setBalance(props.incomeAmount - props.expenseAmount - props.savingAmount);
   };
-  
 
   useEffect(() => {
     calculateBalance();
-    }, [props.incomeAmount, props.expenseAmount, props.savingAmount]);
+  }, [props.incomeAmount, props.expenseAmount, props.savingAmount]);
 
   // useEffect(() => {
   //   calculateTotalBalance();
@@ -53,7 +61,7 @@ const TransferForm = (props: TransferType) => {
             required
           />
         </div>
-        <button>Transfer</button>
+        <button disabled={invalidInput}>Transfer</button>
       </form>
     </div>
   );

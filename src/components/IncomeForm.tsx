@@ -1,6 +1,6 @@
-import { FormEvent, ChangeEvent, useState } from "react";
+import { FormEvent, ChangeEvent, useState, useEffect } from "react";
 import { FaTrashAlt } from "react-icons/fa";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 import { FormTypes } from "../types/componentsTypes";
 
@@ -18,6 +18,15 @@ const IncomeForm = (props: IncomeType) => {
 
   const [incomes, setIncomes] = useState<FormTypes[]>([]);
 
+  const [invalidInput, setInvalidInput] = useState(false);
+  useEffect(() => {
+    if (income.amount < 0) {
+      setInvalidInput(true);
+    } else {
+      setInvalidInput(false);
+    }
+  }, [income]);
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setIncome((prevIncome) => {
@@ -28,7 +37,7 @@ const IncomeForm = (props: IncomeType) => {
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     if (income.source && income.amount && income.date) {
-        const newIncome = {...income, id: uuidv4()}
+      const newIncome = { ...income, id: uuidv4() };
       //add income to incomes array
       setIncomes((prevIncomes) => {
         return [...prevIncomes, newIncome];
@@ -44,9 +53,9 @@ const IncomeForm = (props: IncomeType) => {
   };
 
   const handleDelete = (id: string) => {
-    const filteredIncomes = incomes.filter((income) => income.id !== id)
+    const filteredIncomes = incomes.filter((income) => income.id !== id);
     setIncomes(filteredIncomes);
-};
+  };
 
   return (
     <div className="card">
@@ -84,7 +93,7 @@ const IncomeForm = (props: IncomeType) => {
             required
           />
         </div>
-        <button>Add income</button>
+        <button disabled={invalidInput}>Add income</button>
       </form>
 
       <ul>
@@ -93,7 +102,11 @@ const IncomeForm = (props: IncomeType) => {
             <li key={index}>
               {" "}
               {income.source}: {income.amount}SAR on {income.date}{" "}
-              <button onClick={() => {handleDelete(income.id)}}>
+              <button
+                onClick={() => {
+                  handleDelete(income.id);
+                }}
+              >
                 <FaTrashAlt />
               </button>
             </li>

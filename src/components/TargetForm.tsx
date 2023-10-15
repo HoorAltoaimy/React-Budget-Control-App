@@ -1,23 +1,29 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
 type TargetType = {
   getSaving: (mySaving: number) => void;
   saving: number;
-}
-
+};
 
 const TargetForm = (props: TargetType) => {
-
   const [target, setTarget] = useState(0);
+
+  const [invalidInput, setInvalidInput] = useState(false);
+  useEffect(() => {
+    if (target < 0) {
+      setInvalidInput(true);
+    } else {
+      setInvalidInput(false);
+    }
+  }, [target]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTarget(Number(event.target.value));
   };
 
-
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    props.getSaving(props.saving); 
+    props.getSaving(props.saving);
     setTarget(0);
   };
 
@@ -38,9 +44,9 @@ const TargetForm = (props: TargetType) => {
         <button>Reset</button>
       </form>
       <p>Current saving: {props.saving}</p>
-      <p>Target:{target}</p>
+      <p>Target:{invalidInput ? "" : target}</p>
       <p>Progress: </p>
-      <progress max={target} value={(props.saving/target)*100}/>
+      <progress max={target} value={(props.saving / target) * 100} />
     </div>
   );
 };
