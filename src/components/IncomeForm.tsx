@@ -98,8 +98,8 @@ const IncomeForm = (props: IncomeType) => {
 
       <ul>
         {incomes.length > 0 &&
-          incomes.map((income, index) => (
-            <li key={index}>
+          incomes.map((income) => (
+            <li key={income.id}>
               {" "}
               {income.source}: {income.amount}SAR on {income.date}{" "}
               <button

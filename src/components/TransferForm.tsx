@@ -35,7 +35,8 @@ const TransferForm = (props: TransferType) => {
   //   }, [balance]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setTransfer(Number(event.target.value));
+    let transferInput = Number(event.target.value);
+    setTransfer(transferInput);
   };
 
   const handleSubmit = (event: FormEvent) => {
@@ -46,7 +47,8 @@ const TransferForm = (props: TransferType) => {
 
   return (
     <div className="card">
-      {/* <h3>Current balance: {props.incomeAmount - props.expenseAmount - props.savingAmount}</h3> */}
+      {/* const totalBalance = {props.incomeAmount - props.expenseAmount - props.savingAmount;
+       <h3>Current balance: {totalBalance}</h3> */}
       <h3>Current balance: {balance}</h3>
 
       <form onSubmit={handleSubmit}>

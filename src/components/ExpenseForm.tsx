@@ -98,8 +98,8 @@ const ExpenseForm = (props: SavingType) => {
 
       <ul>
         {expenses.length > 0 &&
-          expenses.map((expense, index) => (
-            <li key={index}>
+          expenses.map((expense) => (
+            <li key={expense.id}>
               {" "}
               {expense.source}: {expense.amount}SAR on {expense.date}
               <button
